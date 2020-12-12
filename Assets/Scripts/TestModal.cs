@@ -15,8 +15,16 @@ public class TestModal : MonoBehaviour
 
     private void OnClick()
     {
-        MessageBox.Instance.Show("Test", "Boddy",MessageBox.MessageBoxButton.YesNo);
+        MessageBox m = MessageBox.Instance.Show("Test", "Boddy", MessageBox.MessageBoxButton.YesNo,MessageBox.MessageBoxInput.NormalInput);
+        m.onCancel.AddListener(Cancel);
     }
+
+    private void Cancel()
+    {
+        Debug.Log("Cancelled");
+    }
+    
+    
 
     // Update is called once per frame
     void Update()

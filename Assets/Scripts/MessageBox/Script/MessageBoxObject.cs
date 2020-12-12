@@ -8,6 +8,7 @@ public class MessageBoxObject : MonoBehaviour
     public TextMeshProUGUI header;
     public TextMeshProUGUI message;
     public TextMeshProUGUI details;
+    public TMP_InputField inputField;
     public Button confirmButton;
     public Button exitButton;
     public Button outsideButton;
