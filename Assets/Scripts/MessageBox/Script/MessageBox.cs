@@ -40,7 +40,7 @@ public class MessageBox : Manager<MessageBox>
         MessageBoxObject m_obj =  Instantiate(_MessageBoxObject, transform);
         m_obj.header.gameObject.SetActive(true);
         m_obj.message.gameObject.SetActive(true);
-
+        
         _MessageBoxInput = input;
         _MessageBoxButton = messageBoxButton;
         m_obj.header.text = title;
@@ -79,17 +79,17 @@ public class MessageBox : Manager<MessageBox>
 
     void ManageMessageBoxInput(MessageBoxObject m_obj)
     {
-        // if (_MessageBoxInput == MessageBoxInput.NormalInput || _MessageBoxInput == MessageBoxInput.RichTextBoxInput)
-        // {
-        //     m_obj.inputField.gameObject.SetActive(true);
-        //     m_obj.inputField.onValueChanged.RemoveAllListeners();
-        //     m_obj.inputField.onValueChanged.AddListener(SubmitForm);
-        // }
-        //
-        // if (_MessageBoxInput == MessageBoxInput.RichTextBoxInput)
-        // {
-        //     m_obj.inputField.GetComponent<RectTransform>().sizeDelta += new Vector2(0,100);
-        // }
+        if (_MessageBoxInput == MessageBoxInput.NormalInput || _MessageBoxInput == MessageBoxInput.RichTextBoxInput)
+        {
+            m_obj.inputField.gameObject.SetActive(true);
+            m_obj.inputField.onValueChanged.RemoveAllListeners();
+            m_obj.inputField.onValueChanged.AddListener(SubmitForm);
+        }
+        
+        if (_MessageBoxInput == MessageBoxInput.RichTextBoxInput)
+        {
+            m_obj.inputField.GetComponent<RectTransform>().sizeDelta += new Vector2(0,100);
+        }
         
     }
 
