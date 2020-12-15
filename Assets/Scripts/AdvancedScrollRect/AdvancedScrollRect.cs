@@ -15,7 +15,16 @@ public class AdvancedScrollRect : ScrollRect
     public Transform selectionPoint;
     public float buttonScale;
     
+    public enum  Animation
+    {
+        SlideUp,
+        SlideDown,
+        ZoomIn,
+    }
 
+    public Animation animation;
+
+    private Vector3 initalPos;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -30,14 +39,7 @@ public class AdvancedScrollRect : ScrollRect
     {
         foreach (Transform child in content)
         {
-            if (OnEntered(child))
-            {
-                child.DOScale(Vector3.one * buttonScale, 0.4f);
-            }
-            else
-            {
-                child.DOScale(Vector3.one, 0.4f);
-            }
+            ChooseAnimation(child,OnEntered(child));
         }
     }
 
@@ -53,6 +55,44 @@ public class AdvancedScrollRect : ScrollRect
             }
         }
         return false;
+    }
+
+    void ChooseAnimation(Transform child,bool entered)
+    {
+        switch (animation)
+        {
+            case Animation.SlideDown:
+                if (entered)
+                {
+                    initalPos = transform.position;
+                    child.DOMoveY(transform.position.y - 0.01f, 0.4f);
+                }
+                else
+                {
+                    child.DOMoveY(initalPos.y, 0.4f);
+                }
+                break;
+            case Animation.SlideUp:
+                if (entered)
+                {
+                    child.DOScale(Vector3.one * buttonScale, 0.4f);
+                }
+                else
+                {
+                    child.DOScale(Vector3.one, 0.4f);
+                }
+                break;
+            case Animation.ZoomIn:
+                if (entered)
+                {
+                    child.DOScale(Vector3.one * buttonScale, 0.4f);
+                }
+                else
+                {
+                    child.DOScale(Vector3.one, 0.4f);
+                }
+                break;
+        }
     }
     
     
